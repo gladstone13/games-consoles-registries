@@ -1,4 +1,4 @@
-const { Games } = require('../models');
+const { games } = require('../models');
 
 class GamesController{
 
@@ -11,12 +11,12 @@ class GamesController{
 
     async get(req, resp) {
         try {
-            const games = await Games.findAll();
-            if(games === null) {
+            const gamesJson = await games.findAll();
+            if(gamesJson === null) {
                 return resp.status(204).json({});
             }
 
-            return resp.status(200).json(games);
+            return resp.status(200).json(gamesJson);
         } catch(err) {
             console.log(err);
             return resp.status(400).json( {'Error': err} );
@@ -27,12 +27,12 @@ class GamesController{
         try {
             let id = req.params.id;
 
-            const games = await Games.findByPk(id);
-            if(games === null) {
+            const gamesJson = await games.findByPk(id);
+            if(gamesJson === null) {
                 return resp.status(204).json({});
             }
 
-            return resp.status(200).json(games);
+            return resp.status(200).json(gamesJson);
         }catch(err) {
             console.log(err);
             return resp.status(400).json( {'Error': err} );
@@ -42,9 +42,9 @@ class GamesController{
     async add(req, resp) {
         try {
             let newGame = req.body;
-            const games = await Games.create(newGame);
+            const gamesJson = await games.create(newGame);
 
-            return resp.status(201).json(games);
+            return resp.status(201).json(gamesJson);
         } catch(err) {
             console.log(err);
             return resp.status(400).json( {'Error': err} );
@@ -54,14 +54,14 @@ class GamesController{
     async update(req, resp) {
         try {
             let id = req.params.id;
-            const games = await Games.findByPk(id);
+            const gamesJson = await games.findByPk(id);
 
-            if(games === null) {
+            if(gamesJson === null) {
                 return resp.status(204).json({});
             }            
 
             let gameUpdated = req.body;
-            await games.update(gameUpdated);
+            await gamesJson.update(gameUpdated);
 
             return resp.status(202).json(games);
         } catch(err) {
@@ -73,13 +73,13 @@ class GamesController{
     async delete(req, resp) {
         try {
             let id = req.params.id;
-            const games = await Games.findByPk(id);
+            const gamesJson = await games.findByPk(id);
 
-            if(games === null) {
+            if(gamesJson === null) {
                 return resp.status(204).json({});
             }
 
-            await games.destroy();
+            await gamesJson.destroy();
 
             return resp.status(202).json({ idDeleted: id });
         } catch(err) {

@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Consoles = sequelize.define('Consoles', {
+    const Consoles = sequelize.define('consoles', {
       description: {
           type: DataTypes.STRING,
           validate: {

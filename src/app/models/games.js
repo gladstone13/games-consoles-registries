@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Games = sequelize.define('Games', {
+    const Games = sequelize.define('games', {
       title: {
         type: DataTypes.STRING,
         validate: {

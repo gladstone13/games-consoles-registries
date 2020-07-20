@@ -1,4 +1,4 @@
-const { Consoles } = require('../models');
+const { consoles } = require('../models');
 
 class ConsolesController {
 
@@ -11,9 +11,9 @@ class ConsolesController {
 
     async get(req, resp) {
         try {
-            const consoles = await Consoles.findAll();
+            const consolesJson = await consoles.findAll();
 
-            return resp.status(200).json(consoles);
+            return resp.status(200).json(consolesJson);
         } catch(err) {
             console.log(err);
             return resp.status(400).json( {'Error': err} );
@@ -23,13 +23,13 @@ class ConsolesController {
     async getById(req, resp) {
         try {
             let id = req.params.id;
-            const consoles = await Consoles.findByPk(id);
+            const consolesJson = await consoles.findByPk(id);
 
-            if(consoles === null) {
+            if(consolesJson === null) {
                 return resp.status(204).json( {} );
             }
 
-            return resp.status(200).json(consoles);
+            return resp.status(200).json(consolesJson);
         } catch(err) {
             console.log(err);
             return resp.status(400).json( {'Error': err} );
@@ -39,9 +39,9 @@ class ConsolesController {
     async add(req, resp) {
         try {
             let newConsole = req.body;
-            const consoles = await Consoles.create(newConsole);
+            const consolesJson = await consoles.create(newConsole);
 
-            return resp.status(201).json(consoles);
+            return resp.status(201).json(consolesJson);
         } catch (err) {
             console.log(err);
             return resp.status(400).json( {'Error': err} );
@@ -51,16 +51,16 @@ class ConsolesController {
     async update(req, resp) {
         try {
             let id = req.params.id;
-            const consoles = await Consoles.findByPk(id);
+            const consolesJson = await consoles.findByPk(id);
 
-            if(consoles === null) {
+            if(consolesJson === null) {
                 return resp.status(204).json( {} );
             }
 
             let consoleUpdated = req.body;
-            await consoles.update(consoleUpdated);
+            await consolesJson.update(consoleUpdated);
 
-            return resp.status(202).json(consoles);
+            return resp.status(202).json(consolesJson);
         } catch(err) {
             console.log(err);
             return resp.status(400).json( {'Error': err} );
@@ -70,13 +70,13 @@ class ConsolesController {
     async delete(req, resp) {
         try {
             let id = req.params.id;
-            const consoles = await Consoles.findByPk(id);
+            const consolesJson = await consoles.findByPk(id);
 
-            if(consoles === null) {
+            if(consolesJson === null) {
                 return resp.status(204).json( {} );
             }
 
-            await consoles.destroy();
+            await consolesJson.destroy();
             return resp.status(202).json({ idDeleted: id });            
         } catch (err) {
             console.log(err);
