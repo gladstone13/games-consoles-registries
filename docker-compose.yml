@@ -1,0 +1,33 @@
+version: "3"
+
+services:
+    gamescontrol_db:
+        container_name: gamescontrol_database_environment
+        build: ./src/database/docker-scripts
+        environment:
+            - MYSQL_DATABASE=gamescontrol
+            - MYSQL_ROOT_PASSWORD=1A2B3c4d
+        ports:
+            - "3306:3306"
+        expose:
+            - 3306
+    gamescontrol:
+        container_name: gamescontrol_application_environment
+        links:
+            - gamescontrol_db
+        build: .
+        environment: 
+                - DB_HOST=gamescontrol_db
+                - DB_PORT=3306
+                - DB_DATABASE=gamescontrol
+                - DB_USER=root
+                - DB_PASSWORD=1A2B3c4d
+                - WAIT_HOSTS=gamescontrol_db:3306
+        command: ["./migration-to-docker.sh", "npm", "start"]
+        ports: 
+            - "3001:3001"
+        volumes:
+            - .:/usr/src/app
+        depends_on: 
+            - gamescontrol_db
+             

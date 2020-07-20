@@ -1,0 +1,5 @@
+FROM mysql
+
+ENV MYSQL_DATABASE gamescontrol
+ENV MYSQL_ROOT_PASSWORD 1A2B3c4d
+ENV DATABASE_HOST gamescontrol_db
