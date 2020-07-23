@@ -63,7 +63,7 @@ class GamesController{
             let gameUpdated = req.body;
             await gamesJson.update(gameUpdated);
 
-            return resp.status(202).json(games);
+            return resp.status(202).json(gamesJson);
         } catch(err) {
             console.log(err);
             return resp.status(400).json( {'Error': err} );

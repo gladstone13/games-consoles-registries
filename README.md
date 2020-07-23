@@ -4,6 +4,7 @@ A system api to receive and to give personal video games informations.
 This project demonstrate a Nodejs implementation where are using:
 - Express
 - Sequelize
+- Json Web Token
 - Mocha
 - Chai
 - Mysql
