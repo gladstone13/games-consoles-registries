@@ -1,4 +1,4 @@
-# gamescontrol
+# gamescontrol-registrionapi
 A system api to receive and to give personal video games informations.
 
 This project demonstrate a Nodejs implementation where are using:
